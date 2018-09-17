@@ -11,7 +11,10 @@ function getQuote() {
         .then(function(resp) {
             return resp.json();
         })
-        .then(createTweet);
+        .then(createTweet)
+        .catch(function(error) {
+            console.log(error.name);   
+        });
 }
 
 function createTweet(input) {
@@ -40,8 +43,6 @@ function createTweet(input) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    getQuote();
-    document.querySelector('.trigger').addEventListener('click', function() {
-        getQuote();
-    });
+        getQuote();    
+    document.querySelector('.trigger').addEventListener('click', getQuote);
 });
